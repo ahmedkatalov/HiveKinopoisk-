@@ -1,6 +1,8 @@
 import Header from './components/pages/header/header';
 import CustomCarousel from './components/pages/home/main/Carousel';
 import { GenreMovies } from './components/pages/home/main/GenreContent';
+import Footer from './components/pages/home/footer/Footer';
+
 function App() {
 
   return (
@@ -8,6 +10,7 @@ function App() {
       <Header/>
       <CustomCarousel/>
       <GenreMovies/>
+      <Footer/>
     </div>
   )
 }
