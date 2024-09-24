@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import './carousel.css';
+import './Carousel.css';
 import image from '../../../assets/img.jpg';
 import img1 from '../../../assets/img1.jpg';
 import img2 from '../../../assets/img2.jpg';
@@ -33,7 +33,7 @@ const slides = [
   },
 ];
 
-function CustomCarousel() {
+const CustomCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -75,7 +75,7 @@ function CustomCarousel() {
                     <p className='description'>{slides[currentIndex].description}</p>
                     <div className='buttons'>
                         <button className='watch-btn'>Watch now</button>
-                        <button className='watch-btn'>Add To Favourits</button>
+                        <button className='add-btn'>Add To Favourits</button>
                     </div>
                   </div>
                 </div>
