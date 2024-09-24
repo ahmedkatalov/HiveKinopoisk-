@@ -1,0 +1,41 @@
+.genreContainer{
+    max-width: 1500px;
+    margin: auto;
+}
+
+
+
+.genreButtons{
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+}
+
+.genreButtons button{
+    background-color: rgb(32, 31, 31);
+    color: aliceblue;
+    padding: 5px;
+    border-radius: 5px;
+    transition: all 0.5s;
+    width: 150px;
+}
+.genreButtons button:hover{
+    background-color: rgb(231, 197, 5);
+    transform: scale(1.05); 
+    
+}
+
+.active {
+    border: 2px solid #ebc801;
+}
+.grid{
+    display: grid;
+grid-template-columns: repeat(5, 300px);
+gap: 5px;
+}
+
+.state{
+    text-align: center;
+}

@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import './carousel.css';
-import image from '../../../assets/img.jpg';
-import img1 from '../../../assets/img1.jpg';
-import img2 from '../../../assets/img2.jpg';
-import img3 from '../../../assets/img3.jpg';
-import star from '../../../assets/star.svg';
+import image from '../../../../assets/img.jpg';
+import img1 from '../../../../assets/img1.jpg';
+import img2 from '../../../../assets/img2.jpg';
+import img3 from '../../../../assets/img3.jpg';
+import star from '../../../../assets/star.svg';
 
 const slides = [
   {
