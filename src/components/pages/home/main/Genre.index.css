@@ -27,9 +27,13 @@
     
 }
 
+
+
 .active {
     border: 2px solid #ebc801;
 }
+
+
 .grid{
     display: grid;
 grid-template-columns: repeat(5, 300px);
