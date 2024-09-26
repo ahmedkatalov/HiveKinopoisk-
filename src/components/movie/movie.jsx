@@ -1,10 +1,10 @@
 import { useState, useRef } from "react";
 import "./movie.css";
-import Header from "./header";
 import posterPotter from "./imgs/Harry-Potter.png";
 import Harry from "./imgs/harry-povar.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from 'swiper/modules'
+
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -44,7 +44,6 @@ function Watch() {
   return (
     <>
       <div className="wrapper">
-        <Header />
         <div className="movie__about">
           <div className="movie__poster">
             <img src={posterPotter} alt="Постер с Поваром" className="poster" />
@@ -151,7 +150,7 @@ function Watch() {
               navigation={true}
               modules={[Navigation]}
               className="mySwiper"
-              slidesPerView={4}
+              slidesPerView={4.5}
               spaceBetween={-50}
               centeredSlides={true}
               centeredSlidesBounds={true}

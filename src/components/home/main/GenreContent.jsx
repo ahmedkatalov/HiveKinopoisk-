@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setGenre, clearGenre, fetchMoviesBySelectedGenre } from "../../../redux/genreMovie"; 
 import "./Genre.index.css";
+import { NavLink } from "react-router-dom";
 
 export const GenreMovies = () => {
     const dispatch = useDispatch();
@@ -90,6 +91,7 @@ export const GenreMovies = () => {
                 {movies.length > 0 ? (
                     movies.map((movie) => (
                         <div key={movie.id}>
+                            <NavLink to={`movies/${movie.id}`}>
                             {movie.poster && (
                                 <img
                                     src={movie.poster.previewUrl}
@@ -97,6 +99,7 @@ export const GenreMovies = () => {
                                     style={{ width: '100%' }}
                                 />
                             )}
+                            </NavLink>
                         </div>
                     ))
                 ) : (

@@ -14,12 +14,11 @@ body {
 }
 
 .wrapper {
-    max-width: 1470px;
-    padding: 80px;
-    margin: 20px auto;
+    max-width: 1400px;
+    margin: auto;
     color: white;
-    border: 1px solid orange;
-    border-radius: 10px;
+    /* border: 1px solid orange;
+    border-radius: 10px; */
 }
 
 .movie__about {
@@ -218,6 +217,7 @@ body {
   display: block;
   width: 250px;
   object-fit: cover;
+  border-radius: 10px;
 }
 
 .swiper-button-prev, .swiper-button-next {
