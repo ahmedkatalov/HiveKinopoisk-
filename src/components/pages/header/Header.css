@@ -26,6 +26,7 @@
 }
 
 .h-link:hover {
+    /* text-decoration: underline; */
     color: #f0ae27;
 }
 
@@ -55,7 +56,8 @@
 }
 
 .sign-in-btn {
-    padding: 7px 40px;
+    width: 120px;
+    padding: 10px;
     border-radius: 20px;
     border: 1px solid #f0ae27;
     background-color: transparent;

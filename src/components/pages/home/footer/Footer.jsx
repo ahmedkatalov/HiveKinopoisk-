@@ -13,8 +13,8 @@ const Footer = () => {
                         </p>
                     </div>
                     <div className='instal-btns'>
-                        <button className='app-btn i-scale'>App store</button>
-                        <button className='gp-btn i-scale'></button>
+                        <button className='app-btn'>App store</button>
+                        <button className='gp-btn'></button>
                     </div>
                 </div>
 
