@@ -10,7 +10,7 @@ export const GenreMovies = () => {
     const { movies, loading, error } = useSelector(state => state.genre);
     const [activeGenre, setActiveGenre] = useState('');
     const [moviesToShow, setMoviesToShow] = useState(20);
-    
+
     useEffect(() => {
         dispatch(fetchMoviesBySelectedGenre(''));
     }, [dispatch]);
@@ -32,6 +32,7 @@ export const GenreMovies = () => {
         setMoviesToShow(moviesToShow + 10);
     };
 
+ 
     return (
         <div className="genreContainer">
             <div className="genreButtons">
@@ -98,7 +99,7 @@ export const GenreMovies = () => {
                 {movies.length > 0 ? (
                     movies.slice(0, moviesToShow).map((movie) => (
                         <div key={movie.id} className="movie-item">
-                            <NavLink to={`movies/${movie.id}`}>
+                            <NavLink to={`movies/${movie.id}`} state={{movie: movie}}>
                             {movie.poster && (
                                 <img
                                     src={movie.poster.previewUrl}

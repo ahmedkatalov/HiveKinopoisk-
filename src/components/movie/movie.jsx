@@ -1,10 +1,9 @@
 import { useState, useRef } from "react";
 import "./movie.css";
-import posterPotter from "./imgs/Harry-Potter.png";
 import Harry from "./imgs/harry-povar.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from 'swiper/modules'
-
+import { useLocation } from "react-router-dom";
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -13,6 +12,8 @@ import 'swiper/css/navigation';
 
 
 function Watch() {
+  const location = useLocation();
+  const movie = location.state.movie;
   const [isExpanded, setIsExpanded] = useState(false);
   const castRef = useRef(null);
 
@@ -26,37 +27,30 @@ function Watch() {
         left: direction === "left" ? -200 : 200,
         behavior: "smooth",
       });
-    }
+    } 
   };
+  
+  const fullText = movie.description;
+  const shortText = fullText.slice(0, 200) + "...";
 
-  const fullText = `Во время ссоры с родственниками герой случайно отправляет опекуншу 
-      летать над просторами Англии. Уходит, добирается до Косого переулка 
-      автобусом «Ночной рыцарь», обслуживающим волшебников, попавших в беду… 
-      В разговоре с министром магии герой получает информацию о побеге из заклчюения 
-      Сириуса Блэка – волшебника, из-за предательства которого погибли родители. 
-      Преступник намерен расправиться с ним. Школу от проникновения Сириуса Блэка защищают, 
-      разместив по периметру дементоров – жутких стражей, способных оставить жертву без надежды. 
-      Блэк, как становится известным, дружил с отцом Поттера. В школе работает профессор Люпин, 
-      который тоже был вхож в дом родителей`;
-
-  const shortText = fullText.slice(0, 460) + "...";
+  
 
   return (
     <>
       <div className="wrapper">
         <div className="movie__about">
           <div className="movie__poster">
-            <img src={posterPotter} alt="Постер с Поваром" className="poster" />
+            <img src={movie.poster.url} alt="Постер с Поваром" className="poster" />
             <button type="button" className="poster__button">
               Watch Now
             </button>
           </div>
           <div className="movie__text">
-            <h1 className="movie__name">Гарри Поттер и узник Азкабана</h1>
+            <h1 className="movie__name">{movie.name}</h1>
             <div className="movie__info">
               <div className="rate">
                 <span className="rate__header">Rate</span>
-                <span className="rate__number">⭐8/10</span>
+                <span className="rate__number">⭐{movie.rating.imdb}</span>
               </div>
               <div className="genre">
                 <span className="genre__header">Genre</span>
@@ -64,7 +58,7 @@ function Watch() {
               </div>
               <div className="duration">
                 <span className="duration__header">Duration</span>
-                <span className="duration__time">2h 30m</span>
+                <span className="duration__time">{movie.movieLength}</span>
               </div>
             </div>
             <div className="text">
@@ -79,7 +73,7 @@ function Watch() {
                 onClick={() => scrollCast("left")}
                 className="scroll-btn__left"
               >
-                ◀
+                &lt;
               </button>
               <div className="movie__cast" ref={castRef}>
                 <div className="acter">
@@ -122,7 +116,7 @@ function Watch() {
                 onClick={() => scrollCast("right")}
                 className="scroll-btn__right"
               >
-                ▶
+                &gt;
               </button>
             </div>
           </div>
@@ -131,9 +125,10 @@ function Watch() {
           <h1 className="player__header">Trailer</h1>
           <iframe
             className="video"
-            src="https://www.youtube.com/embed/VwErvYgoH70?si=4yVZndSprgk__1YU"
+            src={movie.url}
+            sandbox="allow-scripts allow-downloads"
             title="YouTube video player"
-            frameBorder="0"
+            frameBorder="1"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
             allowfullscreen = "allowfullscreen"

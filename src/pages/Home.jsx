@@ -1,5 +1,3 @@
-
-
 import CustomCarousel from '../components/home/main/Carousel';
 import { GenreMovies } from '../components/home/main/GenreContent';
 
