@@ -74,7 +74,7 @@ ul>li:hover {
     background-size: 100px 100px;
 }
 
-button:hover {
+.i-scale:hover {
     transform: scale(1.05); 
 }
 
