@@ -96,8 +96,8 @@ export const GenreMovies = () => {
                 </div>
             <div className="grid" id="moviesList">
                 {movies.length > 0 ? (
-                    movies.map((movie) => (
-                        <div key={movie.id}>
+                    movies.slice(0, moviesToShow).map((movie) => (
+                        <div key={movie.id} className="movie-item">
                             <NavLink to={`movies/${movie.id}`}>
                             {movie.poster && (
                                 <img
