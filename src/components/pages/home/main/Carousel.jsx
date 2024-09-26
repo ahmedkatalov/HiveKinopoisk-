@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 import "./Carousel.css";
 import image from "../../../../assets/img.jpg";
 import img1 from "../../../../assets/img1.jpg";
