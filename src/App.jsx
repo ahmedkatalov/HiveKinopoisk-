@@ -1,18 +1,20 @@
-import Header from './components/pages/header/header';
-import CustomCarousel from './components/pages/home/main/Carousel';
-import { GenreMovies } from './components/pages/home/main/GenreContent';
-import Footer from './components/pages/home/footer/Footer';
+import { Routes, Route } from "react-router-dom";
+import { MainLayout, } from "./components/MainLayout";
+import HomePage from "./pages/Home";
+import Watch from "./components/movie/movie";
+
 
 function App() {
-
   return (
-    <div className='mainContainer'>
-      <Header/>
-      <CustomCarousel/>
-      <GenreMovies/>
-      <Footer/>
-    </div>
-  )
+    <Routes>
+      {/* <Route path="/sign-in" element={<SignIn />} />
+      <Route path="/sign-up" element={<SignUp />} /> */}
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<HomePage />} />
+        <Route path="movies/:id" element={<Watch />} />
+      </Route>
+    </Routes>
+  );
 }
 
-export default App
+export default App;
