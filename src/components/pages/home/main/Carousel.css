@@ -1,6 +1,7 @@
 .main-container {
     position: relative;
     height: 700px;
+    margin-bottom: 50px;
 }
 
 .carousel {
@@ -87,7 +88,6 @@
     color: #c3c2c5a5;
     border: none;
     padding: 10px;
-    cursor: pointer;
     font-size: 34px;
     z-index: 1;
 }
