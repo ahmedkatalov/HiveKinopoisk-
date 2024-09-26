@@ -1,95 +1,103 @@
-import { useState, useEffect } from "react"; // Добавляем useState и useEffect
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setGenre, clearGenre, fetchMoviesBySelectedGenre } from "../../../redux/genreMovie"; // Импортируем действия
+import { setGenre, clearGenre, fetchMoviesBySelectedGenre } from "../../../redux/genreMovie";
+
 import "./Genre.index.css";
 
 export const GenreMovies = () => {
     const dispatch = useDispatch();
     const { movies, loading, error } = useSelector(state => state.genre);
-    const [activeGenre, setActiveGenre] = useState(''); // Добавляем состояние для активного жанра
-
-    // Логика для загрузки всех фильмов при первом рендере
+    const [activeGenre, setActiveGenre] = useState('');
+    const [moviesToShow, setMoviesToShow] = useState(20);
+    
     useEffect(() => {
-        dispatch(fetchMoviesBySelectedGenre('')); // Загрузка всех фильмов по умолчанию
+        dispatch(fetchMoviesBySelectedGenre(''));
     }, [dispatch]);
 
     const handleGenreChange = (genre) => {
-        setActiveGenre(genre); // Устанавливаем активный жанр
+        setActiveGenre(genre);
+        setMoviesToShow(20);
+        
         if (genre) {
             dispatch(setGenre(genre)); 
-            dispatch(fetchMoviesBySelectedGenre(genre)); // Используем fetchMoviesBySelectedGenre
+            dispatch(fetchMoviesBySelectedGenre(genre));
         } else {
             dispatch(clearGenre()); 
-            dispatch(fetchMoviesBySelectedGenre('')); // Получение всех фильмов, если жанр очищен
+            dispatch(fetchMoviesBySelectedGenre(''));
         }
+    };
+
+    const loadMoreMovies = () => {
+        setMoviesToShow(moviesToShow + 10);
     };
 
     return (
         <div className="genreContainer">
             <div className="genreButtons">
                 <button 
-                    className={activeGenre === '' ? 'active' : ''} 
+                    className={activeGenre === '' ? 'active' : ''}
                     onClick={() => handleGenreChange('')}
                 >
-                    Все жанры
+                    All genres
                 </button>
                 <button 
                     className={activeGenre === 'комедия' ? 'active' : ''} 
                     onClick={() => handleGenreChange('комедия')}
                 >
-                    Комедия
+                    Comedy
                 </button>
                 <button 
                     className={activeGenre === 'боевик' ? 'active' : ''} 
                     onClick={() => handleGenreChange('боевик')}
                 >
-                    Боевик
+                    Action
                 </button>
                 <button 
                     className={activeGenre === 'фантастика' ? 'active' : ''} 
                     onClick={() => handleGenreChange('фантастика')}
                 >
-                    Фантастика
+                    Fantasy
                 </button>
                 <button 
                     className={activeGenre === 'ужасы' ? 'active' : ''} 
                     onClick={() => handleGenreChange('ужасы')}
                 >
-                    Ужасы
+                    Horror
                 </button>
                 <button 
                     className={activeGenre === 'драма' ? 'active' : ''} 
                     onClick={() => handleGenreChange('драма')}
                 >
-                    Драма
+                    Drama
                 </button>
                 <button 
                     className={activeGenre === 'приключения' ? 'active' : ''} 
                     onClick={() => handleGenreChange('приключения')}
                 >
-                    Приключения
+                    Adventure
                 </button>
                 <button 
                     className={activeGenre === 'семейное' ? 'active' : ''} 
                     onClick={() => handleGenreChange('семейное')}
                 >
-                    Семейное
+                    Family
                 </button>
                 <button 
                     className={activeGenre === 'триллер' ? 'active' : ''} 
                     onClick={() => handleGenreChange('триллер')}
                 >
-                    Триллер
+                    Triller
                 </button>
             </div>
                 <div className="state">
-                {loading && <p>Загрузка...</p>}
-                {error && <p>Ошибка: {error}</p>}
+                    {loading && <p>Loading...</p>}
+                    {error && <p>Error: {error}</p>}
                 </div>
             <div className="grid" id="moviesList">
                 {movies.length > 0 ? (
-                    movies.map((movie) => (
-                        <div key={movie.id}>
+                    movies.slice(0, moviesToShow).map((movie) => (
+                        <div className="movie-item"
+                        key={movie.id}>
                             {movie.poster && (
                                 <img
                                     src={movie.poster.previewUrl}
@@ -100,9 +108,14 @@ export const GenreMovies = () => {
                         </div>
                     ))
                 ) : (
-                    <p>Фильмы не найдены</p>
+                    <p className="film-not-found">Movies not found</p>
                 )}
             </div>
+            {moviesToShow < movies.length && (
+                <button onClick={loadMoreMovies} className="load-more-btn">
+                    Load More
+                </button>
+            )}
         </div>
     );
 };
