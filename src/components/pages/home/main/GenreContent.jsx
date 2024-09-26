@@ -1,39 +1,35 @@
-import { useState, useEffect } from "react"; // Добавляем useState и useEffect
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setGenre, clearGenre, fetchMoviesBySelectedGenre } from "../../../redux/genreMovie"; // Импортируем действия
+import { setGenre, clearGenre, fetchMoviesBySelectedGenre } from "../../../redux/genreMovie";
+
 import "./Genre.index.css";
 
 export const GenreMovies = () => {
     const dispatch = useDispatch();
     const { movies, loading, error } = useSelector(state => state.genre);
-    const [activeGenre, setActiveGenre] = useState(''); // Добавляем состояние для активного жанра
-
-    //me
+    const [activeGenre, setActiveGenre] = useState('');
     const [moviesToShow, setMoviesToShow] = useState(20);
-    //me
-    // Логика для загрузки всех фильмов при первом рендере
+    
     useEffect(() => {
-        dispatch(fetchMoviesBySelectedGenre('')); // Загрузка всех фильмов по умолчанию
+        dispatch(fetchMoviesBySelectedGenre(''));
     }, [dispatch]);
 
     const handleGenreChange = (genre) => {
-        setActiveGenre(genre); // Устанавливаем активный жанр
-        //me
+        setActiveGenre(genre);
         setMoviesToShow(20);
-        //me
+        
         if (genre) {
             dispatch(setGenre(genre)); 
-            dispatch(fetchMoviesBySelectedGenre(genre)); // Используем fetchMoviesBySelectedGenre
+            dispatch(fetchMoviesBySelectedGenre(genre));
         } else {
             dispatch(clearGenre()); 
-            dispatch(fetchMoviesBySelectedGenre('')); // Получение всех фильмов, если жанр очищен
+            dispatch(fetchMoviesBySelectedGenre(''));
         }
     };
-    //me
+
     const loadMoreMovies = () => {
-        setMoviesToShow(moviesToShow + 10); // Увеличиваем количество отображаемых фильмов на 10
+        setMoviesToShow(moviesToShow + 10);
     };
-    //me
 
     return (
         <div className="genreContainer">
