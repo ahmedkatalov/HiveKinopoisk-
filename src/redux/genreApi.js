@@ -1,4 +1,4 @@
-const apiKey = 'W58KPZG-4654CXA-K5GC8H8-Z61ARE7';
+const apiKey = 'TJ9EKK9-CK5MV0W-HD3BW9G-RG3522B';
 
 export const fetchMoviesByGenre = async (genre) => {
     let apiUrl = `https://api.kinopoisk.dev/v1.3/movie?limit=200`; 
@@ -16,7 +16,7 @@ export const fetchMoviesByGenre = async (genre) => {
     });
 
     if (!response.ok) {
-        throw new Error(`Ошибка: ${response.statusText}`);
+        throw new Error(`Ошибка: ${response.statusText} Данные: `);
     }
 
     const data = await response.json();
