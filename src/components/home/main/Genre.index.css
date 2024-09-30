@@ -26,7 +26,7 @@
     transform: scale(1.05);  
 }
 
-.active {
+.tapped {
     border: 2px solid #f0ae27;
 }
 
@@ -75,4 +75,64 @@
 .load-more-btn:hover {
     transform: scale(1.05); 
     background-color: #f0ae27;
+}
+
+/* MEDIA  */
+
+@media (max-width: 960px) {
+    .genreButtons {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    .genreButtons button {
+        display: inline-block;
+        margin-right: 10px;
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+
+    .genreButtons::-webkit-scrollbar {
+        height: 2px;
+    }
+
+    .genreButtons::-webkit-scrollbar-thumb {
+        background-color: #ffcc00;
+        border-radius: 10px;
+    }
+
+    .genreButtons::-webkit-scrollbar-track {
+        background-color: #222;
+    }
+}
+
+@media(max-width: 770px) {
+    .grid {
+        margin: 0;
+        grid-template-columns: repeat(3, 150px);
+        gap: 20px 30px;
+    }
+
+    .movie-item {
+        width: 150px;
+    }
+}
+
+@media(max-width: 600px) {
+    .grid {
+        grid-template-columns: repeat(3, 100px);
+        gap: 15px 15px;
+    }
+
+    .movie-item {
+        width: 100px;
+    }
+
+    .load-more-btn {
+        margin-left: 38% !important;
+        padding: 7px 40px !important; 
+        font-size: 1rem !important;
+    }
 }
