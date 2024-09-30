@@ -1,5 +1,5 @@
 .header-box {
-    max-width: 1400px;
+    max-width: 1500px;
     margin-inline: auto;
     padding: 50px 0;
 }
@@ -8,15 +8,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
-
-.headline {
-    color: #fff;
-    font-size: 2.7rem;
-}
-
-.h2-outstanding-letters {
-    color: #f0ae27;
 }
 
 .h-link {
@@ -29,29 +20,40 @@
     color: #f0ae27;
 }
 
-.h-link:active {
-    text-decoration: underline;
+.h-link-on {
     color: #f0ae27;
+    font-size: 1.8rem;
+    text-decoration: underline;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    width: 60%;
+    border: 1px solid #fff;
+    border-radius: 25px;
+    background-color: #0f1014;
+    padding: 4px 0 4px 20px;
 }
 
 .input-search {
     background-color: #0f1014;
     color: #fff;
-    border: 1px solid #fff;
-    width: 60%;
+    font-size: 1.3rem;
+    width: 92%;
     border-radius: 25px;
-    padding: 11px 0;
-    padding-left: 40px;
-    background-image: url('../../../assets/search.svg');
-    background-position: 10px center;
-    background-repeat: no-repeat;
-    background-size: 25px 25px;
+    padding-left: 20px;
+    outline: none;
 }
 
 .input-search::placeholder {
     font-size: 1.3rem;
-    color: #fff;
-    padding-left: 5px;
+    color: #e0dfdf;
+}
+
+.search-svg {
+    width: 35px;
+    background-color: transparent;
 }
 
 .sign-in-btn {
@@ -67,4 +69,123 @@
 .sign-in-btn:hover {
     background-color: #f0ae27;
     transform: scale(1.05); 
+}
+
+/* ANIMATION YEEEEEAAAYYY */
+.headline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.7rem;
+    color: #eaeaea;
+    opacity: 0;
+    animation: zoomIn 3s ease-out forwards;
+}
+
+.letter {
+    display: inline-block;
+    transform: translateY(100px);
+    opacity: 0;
+    animation: wave 1s ease-in-out forwards;
+}
+
+.h2-outstanding-letters {
+    display: inline-block;
+    transform: translateY(100px);
+    opacity: 0;
+    color: #f0ae27;
+    animation: wave 0.8s ease-in-out forwards, colorChange 5s ease-in-out forwards;
+}
+
+.letter:nth-child(1) { animation-delay: 0s; }
+.letter:nth-child(2) { animation-delay: 0.1s; }
+.letter:nth-child(3) { animation-delay: 0.2s; }
+.letter:nth-child(4) { animation-delay: 0.3s; }
+.letter:nth-child(5) { animation-delay: 0.4s; }
+.letter:nth-child(6) { animation-delay: 0.5s; }
+
+.h2-outstanding-letters:nth-child(2) { animation-delay: 0.1s; }
+.h2-outstanding-letters:nth-child(3) { animation-delay: 0.2s; }
+
+@keyframes zoomIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes wave {
+    0% {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes colorChange {
+    0% {
+        color: #ff8d47;
+    }
+    20% {
+        color: #f0ae27;
+    }
+    40% {
+        color: #40cb6a;
+    }
+    60% {
+        color: #47f3ff;
+    }
+    80% {
+        color: #476cff;
+    }
+    90% {
+        color: #bf47ff;
+    }
+    100% {
+        color: #f0ae27;
+    }
+}
+
+/* MEDIA  */
+
+@media (max-width: 1050px) {
+    html {
+        font-size: 10px;
+    }
+
+    .input-container {
+        width: 50%;
+    }
+
+    .search-svg {
+        width: 15px;
+    }
+}
+
+@media (max-width: 830px) {
+    .sign-in-btn {
+        padding: 5px 15px;
+    }
+
+    .input-container {
+        width: 40%;
+    }
+
+    .input-search {
+        width: 90%;
+        padding: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .header-box {
+        display: none;
+    }
 }
