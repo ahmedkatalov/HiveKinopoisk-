@@ -8,7 +8,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 const fetchMovieTrailer = async (movieName) => {
-  const apiKey = 'AIzaSyAjtrwYqWODYPKe_SYDVRRDnS4-CD2-4tE';
+  const apiKey = 'AIzaSyDpbOG6jX8DH_ypGVgiia3ObMR0C__8uJo';
   const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(movieName)}+trailer&key=${apiKey}&type=video&maxResults=1`;
 
   try {
@@ -120,16 +120,16 @@ function Watch() {
         {loading ? (
   <div>Loading...</div> // Loading state
 ) : trailer && trailer.id && trailer.id.videoId ? (
-  <iframe
-    className="video"
-    src={`https://www.youtube.com/embed/${trailer.id.videoId}`}
-    sandbox="allow-scripts allow-downloads"
-    title="YouTube video player"
-    frameBorder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    referrerPolicy="strict-origin-when-cross-origin"
-    allowFullScreen
-  ></iframe>
+<iframe
+  className="video"
+  src={`https://www.youtube.com/embed/${trailer.id.videoId}`}
+  title="YouTube video player"
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerPolicy="strict-origin-when-cross-origin"
+  allowFullScreen
+></iframe>
+
 ) : (
   <div>Ошибка природы</div> // Error handling
 )}
