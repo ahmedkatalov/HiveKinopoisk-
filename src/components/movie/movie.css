@@ -41,6 +41,9 @@
 
 .movie__name{
     font-size: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .movie__text {
@@ -211,4 +214,14 @@
     height: 70px !important;
     color: white !important;
     border-radius: 50%;
+<<<<<<< HEAD
 }
+=======
+}
+
+.addToFav {
+    background: none;
+    display: flex;
+    align-items: center;
+}
+>>>>>>> 3f41e7351f50c27d474e4d69c2dfd12f2b29e657
