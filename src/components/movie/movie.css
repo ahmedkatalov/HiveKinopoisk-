@@ -52,6 +52,9 @@ body {
 
 .movie__name{
     font-size: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .movie__text {
@@ -229,3 +232,8 @@ body {
     border-radius: 50%;
 }
 
+.addToFav {
+    background: none;
+    display: flex;
+    align-items: center;
+}
