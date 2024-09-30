@@ -38,6 +38,12 @@ function Watch() {
   const castRef = useRef(null);
   
   useEffect(() => {
+    
+      window.scrollTo(0, 0)
+    }, [])
+  
+
+  useEffect(() => {
     const getTrailer = async () => {
       if (movie) {
         const trailerData = await fetchMovieTrailer(movie.name);
@@ -86,9 +92,13 @@ function Watch() {
               <span className="genre__header">Genre</span>
               <span className="genre__name">Fantasy</span>
             </div>
+            <div className="genre">
+              <span className="genre__header">Countries</span>
+              <span className="genre__name">{movie.countries[0].name}</span>
+            </div>
             <div className="duration">
               <span className="duration__header">Duration</span>
-              <span className="duration__time">{movie.movieLength}</span>
+              <span className="duration__time">{movie.movieLength}m</span>
             </div>
           </div>
           <div className="text">
@@ -105,8 +115,8 @@ function Watch() {
                 <div className="acter" key={index}>
                   <img src={Harry} alt="гарри повар" />
                   <div className="acter__about">
-                    <span className="name">Дэниэл Редклифф</span>
-                    <span className="character">Гарри Повар</span>
+                    <span className="name">movies</span>
+                    <span className="character">{movie.enName}</span>
                   </div>
                 </div>
               ))}
