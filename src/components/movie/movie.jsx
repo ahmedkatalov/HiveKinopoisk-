@@ -10,9 +10,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFavoriteMovie } from "../../redux/favoriteMovies";
 
 const fetchMovieTrailer = async (movieName) => {
-  const apiKey = 'AIzaSyDpbOG6jX8DH_ypGVgiia3ObMR0C__8uJo';
+  const apiKey = 'AIzaSyCrDezbsl4uDCFubpFq0LYdbDlySbjpUxw';
   const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(movieName)}+trailer&key=${apiKey}&type=video&maxResults=1`;
 
+
+ 
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -39,6 +41,10 @@ function Watch() {
   const castRef = useRef(null);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+  
   // Fetch favorite movies from Redux store
   const favoriteMovies = useSelector((state) => state.favorite.favoriteMovie);
   const isFav = favoriteMovies.find((item) => movie.id === item.id);

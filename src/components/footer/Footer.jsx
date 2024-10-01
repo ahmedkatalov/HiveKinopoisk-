@@ -60,7 +60,10 @@ const Footer = () => {
             </div>
             <div className='f-bottom'>
                 <hr className='line'/>
-                <div className='date'>2024 Movies. All Rights Reserved</div>
+                <div className='date'>
+                    <span className='f-symbol'>&#169;</span>
+                    2024 Movies. All Rights Reserved
+                </div>
             </div>
         </div>
     );

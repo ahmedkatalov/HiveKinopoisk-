@@ -15,7 +15,7 @@ export const fetchMoviesBySelectedGenre = createAsyncThunk(
             const movies = await fetchMoviesByGenre(genre);
             return movies;
         } catch (error) {
-            const errorMessage = error?.message || 'Не удалось получить фильмы';
+            const errorMessage = error?.message || 'Failed to fetch movie';
             return rejectWithValue(errorMessage);
         }
     }
