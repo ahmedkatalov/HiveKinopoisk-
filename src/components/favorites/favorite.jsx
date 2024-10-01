@@ -24,7 +24,7 @@ export function FavoriteList() {
             </div>
           ))
         ) : (
-          <p className='NoFavs'>Здесь пусто...Даже слишком....</p>
+          <p className='NoFavs'>Здесь пусто... Даже слишком....</p>
         )}
       </div>
 
