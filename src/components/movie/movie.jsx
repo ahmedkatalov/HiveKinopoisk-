@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import "./movie.css";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
-import { useLocation, useParams } from "react-router-dom";
+
+import {  useParams } from "react-router-dom";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -11,26 +10,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFavoriteMovie } from "../../redux/favoriteMovies";
 import { getMovieById } from "../../redux/currentMovie";
 
-
-
 function Watch() {
+  const [trailerUrl, setTrailerUrl] = useState(""); // Для хранения ссылки на трейлер
   const { id } = useParams();
-  // const [movie, setMovie] = useState({});
-  const location = useLocation()
-  const posters = location.state.movie;
-  console.log(posters)
 
+ 
   const movie = useSelector((state) => state.currentMovie.currentMovie);
-  const [isExpanded, setIsExpanded] = useState(false);
-  console.log(movie);
   const favoriteMovies = useSelector((state) => state.favorite.favoriteMovie);
   const isFav = favoriteMovies.find((item) => movie?.id === item.id);
-  // const [isFav, setIsFav] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const castRef = useRef(null);
   const dispatch = useDispatch();
 
   const addToFavMovie = (movie) => {
-    // setIsFav(!isFav);
     dispatch(addFavoriteMovie(movie));
   };
 
@@ -47,9 +39,29 @@ function Watch() {
     }
   };
 
-  const fullText = movie?.description || "";
-  const shortText = fullText.length > 200 ? fullText.slice(0, 200) + "..." : fullText;
-  console.log(movie)
+  useEffect(() => {
+    if (movie?.name) {
+      const fetchTrailer = async () => {
+        try {
+          const apiKey = "AIzaSyDpbOG6jX8DH_ypGVgiia3ObMR0C__8uJo"; // API-ключ
+          const query = `${movie.name} trailer`;
+          const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&key=${apiKey}&type=video&maxResults=1`;
+
+          const response = await fetch(url);
+          const data = await response.json();
+
+          if (data.items && data.items.length > 0) {
+            const videoId = data.items[0].id.videoId;
+            setTrailerUrl(`https://www.youtube.com/embed/${videoId}`);
+          }
+        } catch (error) {
+          console.error("Error fetching the trailer:", error);
+        }
+      };
+
+      fetchTrailer();
+    }
+  }, [movie]);
 
   useEffect(() => {
     if (id) {
@@ -57,14 +69,18 @@ function Watch() {
     }
   }, [dispatch, id]);
 
-  if(!movie?.name){
-    return null;
+  if (!movie?.name) {
+    return null; // Если данных о фильме нет, ничего не отображаем
   }
 
   const handleNavigateToShow = () => {
-    window.open(movie.watchability.items[0].url)
+    if (movie.watchability?.items?.[0]?.url) {
+      window.open(movie.watchability.items[0].url);
+    }
+  };
 
-  }
+  const fullText = movie?.description || "";
+  const shortText = fullText.length > 200 ? fullText.slice(0, 200) + "..." : fullText;
 
   return (
     <>
@@ -73,7 +89,7 @@ function Watch() {
           <div className="movie__poster">
             <img
               src={movie?.poster?.url}
-              alt="Постер с Поваром"
+              alt={movie?.name}
               className="poster"
             />
             <button type="button" className="poster__button" onClick={handleNavigateToShow}>
@@ -82,7 +98,7 @@ function Watch() {
           </div>
           <div className="movie__text">
             <div className="movie__name">
-              <h1>{movie?.name + ` - ` + `(` + movie?.alternativeName + `)`}</h1>
+              <h1>{`${movie?.name} - (${movie?.alternativeName})`}</h1>
               <button className="addToFav" onClick={() => addToFavMovie(movie)}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +115,7 @@ function Watch() {
             <div className="movie__info">
               <div className="rate">
                 <span className="rate__header">Rate</span>
-                <span className="rate__number">⭐{movie?.rating.imdb}</span>
+                <span className="rate__number">⭐{movie?.rating?.imdb}</span>
               </div>
               <div className="genre">
                 <span className="genre__header">Genre</span>
@@ -107,9 +123,7 @@ function Watch() {
               </div>
               <div className="duration">
                 <span className="duration__header">Duration</span>
-                <span className="duration__time">
-                  {movie?.movieLength + ` m`}
-                </span>
+                <span className="duration__time">{`${movie?.movieLength} m`}</span>
               </div>
             </div>
             <div className="text">
@@ -127,48 +141,15 @@ function Watch() {
                 &lt;
               </button>
               <div className="movie__cast" ref={castRef}>
-                <div className="acter">
-                  <img src={movie.persons[0].photo} alt="гарри повар" />
-                  <div className="acter__about">
-                    <span className="name">{movie.persons[0].name}</span>
-                    <span className="character">{movie.persons[0].description}</span>
+                {movie?.persons?.map((person, index) => (
+                  <div className="acter" key={index}>
+                    <img src={person.photo} alt={person.name} />
+                    <div className="acter__about">
+                      <span className="name">{person.name}</span>
+                      <span className="character">{person.description}</span>
+                    </div>
                   </div>
-                </div>
-                <div className="acter">
-                  <img src={movie.persons[1].photo} alt="гарри повар" />
-                  <div className="acter__about">
-                    <span className="name">{movie.persons[1].name}</span>
-                    <span className="character">{movie.persons[1].description}</span>
-                  </div>
-                </div>
-                <div className="acter">
-                  <img src={movie.persons[2].photo} alt="гарри повар" />
-                  <div className="acter__about">
-                    <span className="name">{movie.persons[2].name}</span>
-                    <span className="character">{movie.persons[2].description}</span>
-                  </div>
-                </div>
-                <div className="acter">
-                  <img src={movie.persons[3].photo} alt="гарри повар" />
-                  <div className="acter__about">
-                    <span className="name">{movie.persons[3].name}</span>
-                    <span className="character">{movie.persons[3].description}</span>
-                  </div>
-                </div>
-                <div className="acter">
-                  <img src={movie.persons[4].photo} alt="гарри повар" />
-                  <div className="acter__about">
-                    <span className="name">{movie.persons[4].name}</span>
-                    <span className="character">{movie.persons[4].description}</span>
-                  </div>
-                </div>
-                <div className="acter">
-                  <img src={movie.persons[5].photo} alt="гарри повар" />
-                  <div className="acter__about">
-                    <span className="name">{movie.persons[5].name}</span>
-                    <span className="character">{movie.persons[5].description}</span>
-                  </div>
-                </div>
+                ))}
               </div>
               <button
                 onClick={() => scrollCast("right")}
@@ -179,48 +160,25 @@ function Watch() {
             </div>
           </div>
         </div>
+
         <div className="player">
           <h1 className="player__header">Trailer</h1>
-          <iframe
-            className="video"
-            src={movie?.url}
-            sandbox="allow-scripts allow-downloads"
-            title="YouTube video player"
-            frameBorder="1"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen="allowFullScreen" 
-          ></iframe>
+          {trailerUrl ? (
+            <iframe
+              className="video"
+              src={trailerUrl}
+  
+              title="YouTube video player"
+              frameBorder="1"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            ></iframe>
+          ) : (
+            <p>No trailer available</p>
+          )}
         </div>
 
-        <div className="similar">
-          <div className="similar__header">
-            <h1>Similar</h1>
-            <a href="">View all</a>
-          </div>
-          <div className="similar__cards">
-            <Swiper
-              navigation={true}
-              modules={[Navigation]}
-              className="mySwiper"
-              slidesPerView={4}
-              spaceBetween={10}
-              centeredSlides={true}
-              centeredSlidesBounds={true}
-              setWrapperSize={true}
-            >
-              {Array(8)
-                .fill()
-                .map((_, index) => {
-                  console.log(movie) 
-                  return (
-                  <SwiperSlide key={index}>
-                    <img src={movie?.poster?.url} alt={`Similar Movie ${index + 1}`} />
-                  </SwiperSlide>
-                )})}
-            </Swiper>
-          </div>
-        </div>
       </div>
     </>
   );
