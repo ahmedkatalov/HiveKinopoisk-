@@ -64,7 +64,6 @@ ul>li:hover {
     background-image: url('../../assets/apple-logo.svg');
     background-position: 16px 6px;
     background-size: 28px 28px;
-    transition: transform 0.2s linear;
 }
 
 .gp-btn {
@@ -149,6 +148,46 @@ ul>li:hover {
 }
 
 .date {
-    padding-left: 45%;
+    padding-left: 44%;
     color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.f-symbol {
+    font-size: 20px;
+}
+
+/* MEDIA  */
+
+@media (max-width: 1050px) {
+    h6 {
+        font: 1rem;
+    }
+
+    .i-scale {
+        padding: 5px 5px 5px 10px;
+        width: 100px;
+    }
+
+    .app-btn {
+        font-size: 0.8rem;
+        background-size: 18px;
+        background-position: 9px 4px;
+    }
+
+    .gp-btn {
+        background-size: 80px;
+    }
+}
+
+@media (max-width: 670px) {
+    .footer-container {
+        display: none;
+    }
+
+    .f-bottom {
+        display: none;
+    }
 }

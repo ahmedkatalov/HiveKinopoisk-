@@ -58,6 +58,7 @@
 
 .buttons {
     display: flex;
+    justify-content: center;
     gap: 15px;
 }
 
@@ -119,9 +120,81 @@
     transition: width 0.4s ease, background-color 0.4s ease;
 }
 
-.indicator.active {
+.indicator.i-active {
     background-color: #f0ae27;
     border-radius: 10px;
     height: 7px;
     width: 25px;
+}
+
+/* MEDIA  */
+
+@media(max-width: 630px) {
+
+    html {
+        font-size: 10px;
+    }
+
+    .main-container {
+        height: 400px;
+        margin-bottom: 20px;
+    }
+
+    .carousel {
+        height: 350px;
+      }
+
+      .carousel-caption {
+        bottom: 30px;
+        left: 40px;
+        padding: 0
+    }
+
+    .carousel-caption h3 {
+        font-size: 2rem;
+    }
+
+    .description {
+        font-size: 0.8rem;
+    }
+
+    .carousel-indicators {
+        bottom: 20px;
+    }
+
+    .watch-btn {
+        width: 150px;
+        padding: 5px;
+    }
+
+    .indicator {
+        height: 5px;
+        width: 5px;
+    }
+
+    .indicator.i-active {
+        width: 15px;
+        height: 3px;
+    }
+}
+
+@media(max-width: 500px) {
+    .carousel-caption {
+        display: none;
+    }
+
+    .carousel-button {
+        display: none;
+    }
+}
+
+@media(max-width: 480px) {
+    .main-container {
+        height: 200px;
+        margin-bottom: 10px;
+    }
+
+    .carousel {
+        height: 150px;
+      }
 }

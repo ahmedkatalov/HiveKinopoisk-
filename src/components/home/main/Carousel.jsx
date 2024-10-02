@@ -14,27 +14,31 @@ const slides = [
     rating: "6.6 2019 | Movie | 2.18hrs",
     description:
       "The story of Disney's most iconic villain continues in Maleficent: Mistress of Evil.",
+    link: "https://inoriginal.net/films/292-maleficent-mistress-of-evil-2019.html",
   },
   {
     image: img1,
-    title: "Deadpool & Wolverine",
-    rating: "8.0 2024 | Movie | 2.7hrs",
+    title: "Avengers: Endgame",
+    rating: "8.4 2019 | Movie | 3.1hrs",
     description:
-      "Deadpool & Wolverine is a 2024 American superhero film based on Marvel Comics featuring the characters Deadpool and Wolverine.",
+      "The surviving members of the Avengers team and their allies must devise a new plan to counter the destructive actions of the powerful titan Thanos.",
+    link: "https://inoriginal.net/films/78-avengers-endgame-2019.html",
   },
   {
     image: img2,
-    title: "Lalaland",
-    rating: "8.0 2016 | Movie | 2.27hrs",
+    title: "Despicable Me 4",
+    rating: "6.3 2024 | Movie | 1.34hrs",
     description:
-      "Career aspirations run up against bittersweet romance in modern-day Los Angeles, as two artists face a heartbreaking dilemma. ",
+      "In the fourth installment, Gru and the minions face a new villain. Continuation of the adventures of the funny yellow creatures.",
+    link: "https://inoriginal.net/films/4626-despicable-me-4-2024.html",
   },
   {
     image: img3,
     title: "Harry Potter and the Philosopher's Stone",
-    rating: "7.6 2002 | Movie | 2.32hrs",
+    rating: "7.6 2001 | Movie | 2.32hrs",
     description:
       "An orphaned boy enrolls in a school of wizardry, where he learns the truth about himself, his family and the terrible evil that haunts the magical world.",
+    link: "https://inoriginal.net/films/189-harry-potter-and-the-sorcerer-s-stone-2001.html",
   },
 ];
 
@@ -79,8 +83,9 @@ const CustomCarousel = () => {
               </p>
               <p className="description">{slides[currentIndex].description}</p>
               <div className="buttons">
-                <button className="watch-btn">Watch now</button>
-                <button className="add-btn">Add To Favourits</button>
+                <a href= {slides[currentIndex].link} target="_blank" rel="noopener noreferrer">
+                  <button className="watch-btn">Watch now</button>
+                </a>
               </div>
             </div>
           </div>
@@ -94,7 +99,7 @@ const CustomCarousel = () => {
         {slides.map((_, index) => (
           <span
             key={index}
-            className={`indicator ${currentIndex === index ? "active" : ""}`}
+            className={`indicator ${currentIndex === index ? "i-active" : ""}`}
             onClick={() => setCurrentIndex(index)}
           />
         ))}

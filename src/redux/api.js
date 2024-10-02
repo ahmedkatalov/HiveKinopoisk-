@@ -16,7 +16,7 @@ export const fetchMoviesByName = async (searchInput) => {
     });
 
     if (!response.ok) {
-        throw new Error(`Ошибка: ${response.statusText}`);
+        throw new Error(`Error: ${response.statusText}`);
     }
 
     const data = await response.json();
