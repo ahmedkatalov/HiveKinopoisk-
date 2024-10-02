@@ -1,4 +1,4 @@
-const apiKey = 'TJ9EKK9-CK5MV0W-HD3BW9G-RG3522B';
+const apiKey = '07E5QFY-W1BMBN1-JPKBVKR-G4WRPZZ';
 
 export const fetchMoviesByName = async (searchInput) => {
     let apiUrl = `https://api.kinopoisk.dev/v1.3/movie?limit=60`;
