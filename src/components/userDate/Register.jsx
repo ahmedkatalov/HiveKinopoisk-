@@ -5,6 +5,8 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
+import './Register.css';
+
 const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -30,34 +32,36 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      <form onSubmit={handleRegister}>
-        <input 
-          type="text" 
-          placeholder="Name" 
-          value={name} 
-          onChange={(e) => setName(e.target.value)} 
-          required 
+    <div className='reg-form-container'>
+      <h2 className='reg-form-title'>Register</h2>
+      <form className='reg-form'
+            onSubmit={handleRegister}>
+        <input  className='reg-input-name'
+                type="text" 
+                placeholder="Name" 
+                value={name} 
+                onChange={(e) => setName(e.target.value)} 
+                required 
         />
-        <input 
-          type="email" 
-          placeholder="Email" 
-          value={email} 
-          onChange={(e) => setEmail(e.target.value)} 
-          required 
+        <input  className='reg-input-email' 
+                type="email" 
+                placeholder="Email" 
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)} 
+                required 
         />
-        <input 
-          type="password" 
-          placeholder="Password" 
-          value={password} 
-          onChange={(e) => setPassword(e.target.value)} 
-          required 
+        <input  className='reg-input-password' 
+                type="password" 
+                placeholder="Password" 
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)} 
+                required 
         />
-        <button type="submit">Register</button>
+        <button className='reg-form-btn'
+                type="submit">Register</button>
       </form>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <p>Already have an account? <NavLink to="/login">Log in</NavLink></p>
+      <p className='reg-have-an-acc-text'>Already have an account? <NavLink to="/login">Log in</NavLink></p>
     </div>
   );
 };
