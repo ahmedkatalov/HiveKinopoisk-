@@ -1,6 +1,4 @@
-const apiKey = 
-'TJ9EKK9-CK5MV0W-HD3BW9G-RG3522B';
-// 'W58KPZG-4654CXA-K5GC8H8-Z61ARE7';
+const apiKey = '07E5QFY-W1BMBN1-JPKBVKR-G4WRPZZ';
 
 export const fetchMoviesByName = async (searchInput) => {
     let apiUrl = `https://api.kinopoisk.dev/v1.3/movie?limit=60`;
@@ -24,3 +22,15 @@ export const fetchMoviesByName = async (searchInput) => {
     const data = await response.json();
     return data.docs || [];
 };
+
+export const fetchMovieById = async (id) => {
+    const response = await fetch(`https://api.kinopoisk.dev/v1.4/movie/${id}`, {
+        method: "GET",
+        headers: {
+            accept: 'application/json',
+            'X-API-KEY': apiKey,
+        },
+    })
+      const data = await response.json();
+      return data;
+}
